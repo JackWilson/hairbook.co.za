@@ -8,6 +8,7 @@
       <th>Stylist</th>
       <th>Client</th>
       <th>Service</th>
+      <th>Duration</th>
       <th>Date</th>
       <th>Status</th>
       <th colspan="3"></th>
@@ -17,9 +18,10 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.stylist %></td>
-        <td><%= booking.client %></td>
-        <td><%= booking.service %></td>
+        <td><%= booking.stylist.name %></td>
+        <td><%= booking.client.firstName + " " + booking.client.lastName %></td>
+        <td><%= booking.service.name %></td>
+        <td><%= booking.service.duration %></td>
         <td><%= booking.date %></td>
         <td><%= booking.status %></td>
         <td><%= link_to 'Show', booking %></td>
