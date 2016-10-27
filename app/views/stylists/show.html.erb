@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stylist.name %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @stylist.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_stylist_path(@stylist) %> |
+<%= link_to 'Back', stylists_path %>

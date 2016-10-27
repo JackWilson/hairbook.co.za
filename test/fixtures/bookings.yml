@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stylist: one
+  client: one
+  service: one
+  date: 2016-10-27 14:08:38
+  status: MyString
+
+two:
+  stylist: two
+  client: two
+  service: two
+  date: 2016-10-27 14:08:38
+  status: MyString
