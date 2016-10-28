@@ -45,7 +45,9 @@
     <% booking_time = booking.date.to_time %>
     <% booking_start = booking_time.hour + booking_time.min / 60; %>
 
-    <div class="booking_entry" id="booking_entry" style = "height: 40px;" data-stylist_no="<%= booking.stylist.id %>" data-booking_start="<%= booking_start %>"> <div class="booking_item"><%= booking.client.firstName %> </div> </div>
+    <div class="booking_entry" id="booking_entry" style = "height: 40px;" data-stylist_no="<%= booking.stylist.id %>" data-booking_start="<%= booking_start %>">
+      <div class="booking_item"><%= booking.client.firstName %> </div>
+    </div>
 
 
     <% end %>
