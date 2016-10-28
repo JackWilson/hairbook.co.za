@@ -22,12 +22,15 @@
     var hours = 12;
     var colleft = 0;
     var coltop = 0;
+    var rect = document.getElementById("row7").getBoundingClientRect();
+    console.log(rect.top, rect.left);
+
 
     // calculate the width of each column
-    var colwidth = 900 / cols;
+    var colwidth = 100;
 
     // calculate the height of each 1 hr interval
-    var colheight = 900 / hours;
+    var colheight = 50;
     // alert('in rendergrid block');
 
     // calculate for each block/booking its new left and top values based on tag data values from
@@ -35,8 +38,8 @@
     for (var i = 0; i < blocks.length; i++) {
       var stylist_no = blocks[i].dataset.stylist_no * 1;
       var booking_start = blocks[i].dataset.booking_start * 1;
-      colleft = (stylist_no - 1) * colwidth;
-      coltop = (booking_start - 7) * colheight;
+      colleft = (stylist_no) * colwidth + rect.left;
+      coltop = (booking_start - 7) * colheight + rect.top;
       blocks[i].style.top = coltop + "px";
       blocks[i].style.left = colleft + "px";
     }
@@ -47,12 +50,21 @@
 <table id="background_grid" cellpadding="0" cellspacing="0">
   <tr>
     <!--avatar row-->
+    <!-- empty first column -->
+    <th>Time</th>
     <% @booking_columns.times do |column| %>
     <th><%= image_tag(Stylist.find(column+1).image_url) %></th>
     <%	end %>
   </tr>
   <% @booking_hours.times do |hour| %>
-    <tr id="<%= hour %>">
+      <!-- display teh hours as start time of 7:00 plus hour (of the iteration) and also adjust when get to 12:00 -->
+      <% if hour > 5 then %>
+      <%    hour -= 5    %>
+          <% else %>
+      <% hour = hour + 7 %>
+          <% end %>
+    <tr id="<%= 'row' + hour.to_s %>">
+      <td><%= hour.to_s + ":00" %></td>
       <% @booking_columns.times do |column| %>
         <td><%= column %></td>
       <%	end %>

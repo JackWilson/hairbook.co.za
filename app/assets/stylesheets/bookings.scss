@@ -7,9 +7,11 @@
     th {
       height:100px;
       background-color: green;
+      padding-top: 5px;
       img {
-        max-width: 80px;
+        max-width: 90px;
         height: auto;
+        border-radius: 8px;
       }
     }
     td {
@@ -36,7 +38,7 @@
     }
 
     .booking_entry {
-      position: relative;
+      position: absolute;
       width: 100px;
       border: #000 1px solid;
 

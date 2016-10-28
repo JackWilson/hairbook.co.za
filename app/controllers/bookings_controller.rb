@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
     @booking_hours = 12
-    @booking_columns = 9
+    @booking_columns = Stylist.all.size
   end
 
   # GET /bookings/1
