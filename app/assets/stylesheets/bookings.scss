@@ -2,12 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .bookings {
+  #background_grid {
+    margin:auto;
+    th {
+      height:100px;
+      background-color: green;
+      img {
+        max-width: 80px;
+        height: auto;
+      }
+    }
+    td {
+      width:100px;
+      height:50px;
+      border:1px solid #f00;
+    }
+  }
   .booking_grid {
     width: 900px;
     margin: 0px auto;
     height: 860px;
     border: #999 1px dashed;
     color: #888;
+    position: absolute;
   }
 
     h3 {
@@ -19,8 +36,8 @@
     }
 
     .booking_entry {
-      position: absolute;
-      width: 291px;
+      position: relative;
+      width: 100px;
       border: #000 1px solid;
 
       //padding: 20px;

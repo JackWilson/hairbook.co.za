@@ -8,7 +8,7 @@
   $(document).ready(function(){
     // window.addEventListener("load", renderGrid, false);
     // window.addEventListener("resize", renderGrid, false);
-    alert('in jquery block')
+    // alert('in jquery block')
     renderGrid();
   });
 
@@ -28,24 +28,46 @@
 
     // calculate the height of each 1 hr interval
     var colheight = 900 / hours;
+    // alert('in rendergrid block');
 
     // calculate for each block/booking its new left and top values based on tag data values from
     // the HTML elements
     for (var i = 0; i < blocks.length; i++) {
-      colleft = (blocks[i].data.stylist_no - 1) * colwidth;
-      coltop = (blocks[i].data.booking_start - 7) * colheight;
+      var stylist_no = blocks[i].dataset.stylist_no * 1;
+      var booking_start = blocks[i].dataset.booking_start * 1;
+      colleft = (stylist_no - 1) * colwidth;
+      coltop = (booking_start - 7) * colheight;
       blocks[i].style.top = coltop + "px";
       blocks[i].style.left = colleft + "px";
     }
   }
 
 </script>
-<div class="booking_grid" id="booking_grid">
+<!--Create the background grid for the calendar booking component-->
+<table id="background_grid" cellpadding="0" cellspacing="0">
+  <tr>
+    <!--avatar row-->
+    <% @booking_columns.times do |column| %>
+    <th><%= image_tag(Stylist.find(column+1).image_url) %></th>
+    <%	end %>
+  </tr>
+  <% @booking_hours.times do |hour| %>
+    <tr id="<%= hour %>">
+      <% @booking_columns.times do |column| %>
+        <td><%= column %></td>
+      <%	end %>
+    </tr>
+  <% end %>
+</table>
+
+<div id="booking_grid">
   <% @bookings.each do |booking| %>
     <% booking_time = booking.date.to_time %>
     <% booking_start = booking_time.hour + booking_time.min / 60; %>
 
-    <div class="booking_entry" id="booking_entry" style = "height: 40px;" data-stylist_no="<%= booking.stylist.id %>" data-booking_start="<%= booking_start %>"> <div class="booking_item"><%= booking.client.firstName %> </div> </div>
+    <div class="booking_entry" id="booking_entry" style = "height: 40px;" data-stylist_no="<%= booking.stylist.id %>" data-booking_start="<%= booking_start %>">
+      <div class="booking_item"><%= booking.client.firstName %> </div>
+    </div>
 
 
     <% end %>
