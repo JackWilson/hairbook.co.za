@@ -1,37 +1,53 @@
 <p id="notice"><%= notice %></p>
+<script type="text/javascript">
 
-<h1>Bookings</h1>
+  function renderGrid() {
+// get all the blocks/booking entries create by bookings view and position them in right place
+// we know that our display is just 900px wide
 
-<table>
-  <thead>
-    <tr>
-      <th>Stylist</th>
-      <th>Client</th>
-      <th>Service</th>
-      <th>Duration</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.stylist.name %></td>
-        <td><%= booking.client.firstName + " " + booking.client.lastName %></td>
-        <td><%= booking.service.name %></td>
-        <td><%= booking.service.duration %></td>
-        <td><%= booking.date %></td>
-        <td><%= booking.status %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    var blocks = document.getElementById("booking_grid").children;
+    var pad = 10;
+    var cols = 9;
+    var hours = 12;
+    var colleft = 0;
+    var coltop = 0;
+
+
+    // calculate the width of each column
+    var colwidth = 900 / cols;
+
+    // calculate the height of each 1 hr interval
+    var colheight = 900 / hours;
+
+    // calculate for each block/booking its new left and top values based on tag data values from
+    // the HTML elements
+    for (var i = 0; i < blocks.length; i++) {
+      colleft = (blocks[i].data.stylist_no - 1) * colwidth;
+      coltop = (blocks[i].data.booking_start - 7) * colheight;
+      blocks[i].style.top = coltop + "px";
+      blocks[i].style.left = colleft + "px";
+
+    }
+  }
+
+
+  $(document).load(function(){
+   // window.addEventListener("load", renderGrid, false);
+   // window.addEventListener("resize", renderGrid, false);
+    renderGrid();
+  });
+
+
+</script>
+<div class="booking_grid" id="booking_grid">
+  <% @bookings.each do |booking| %>
+    <% booking_time = booking.date.to_time %>
+    <% booking_start = booking_time.hour + booking_time.min / 60; %>
+
+    <div class="booking_entry" id="booking_entry" style = "height: 40px;" data-stylist_no="<%= booking.stylist.id %>" data-booking_start="<%= booking_start %>"> <div class="booking_item"><%= booking.client.firstName %> </div> </div>
+
+
     <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Booking', new_booking_path %>
+</div>
