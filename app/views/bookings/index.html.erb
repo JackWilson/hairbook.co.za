@@ -1,10 +1,20 @@
 <p id="notice"><%= notice %></p>
 <script type="text/javascript">
 
+//  $("body").click(function(){
+//    alert("YESSSS");
+//  });
+
+  $(document).ready(function(){
+    // window.addEventListener("load", renderGrid, false);
+    // window.addEventListener("resize", renderGrid, false);
+    alert('in jquery block')
+    renderGrid();
+  });
+
   function renderGrid() {
 // get all the blocks/booking entries create by bookings view and position them in right place
 // we know that our display is just 900px wide
-
 
     var blocks = document.getElementById("booking_grid").children;
     var pad = 10;
@@ -12,7 +22,6 @@
     var hours = 12;
     var colleft = 0;
     var coltop = 0;
-
 
     // calculate the width of each column
     var colwidth = 900 / cols;
@@ -27,17 +36,8 @@
       coltop = (blocks[i].data.booking_start - 7) * colheight;
       blocks[i].style.top = coltop + "px";
       blocks[i].style.left = colleft + "px";
-
     }
   }
-
-
-  $(document).load(function(){
-   // window.addEventListener("load", renderGrid, false);
-   // window.addEventListener("resize", renderGrid, false);
-    renderGrid();
-  });
-
 
 </script>
 <div class="booking_grid" id="booking_grid">
