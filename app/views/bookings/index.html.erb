@@ -16,14 +16,21 @@
 // get all the blocks/booking entries create by bookings view and position them in right place
 // we know that our display is just 900px wide
 
+    // first need to move the overall grid to overlap with background grid
+    var grid = document.getElementById("booking_grid")
+    var rect = document.getElementById("row7").getBoundingClientRect();
+    console.log(rect.top, rect.left);
+
+    grid.style.left = (rect.left + 100)+"px";
+    grid.style.top = rect.top +"px";
+
     var blocks = document.getElementById("booking_grid").children;
     var pad = 10;
     var cols = 9;
     var hours = 12;
     var colleft = 0;
     var coltop = 0;
-    var rect = document.getElementById("row7").getBoundingClientRect();
-    console.log(rect.top, rect.left);
+
 
 
     // calculate the width of each column
@@ -38,8 +45,8 @@
     for (var i = 0; i < blocks.length; i++) {
       var stylist_no = blocks[i].dataset.stylist_no * 1;
       var booking_start = blocks[i].dataset.booking_start * 1;
-      colleft = (stylist_no) * colwidth + rect.left;
-      coltop = (booking_start - 7) * colheight + rect.top;
+      colleft = (stylist_no - 1) * colwidth;
+      coltop = (booking_start - 7) * colheight;
       blocks[i].style.top = coltop + "px";
       blocks[i].style.left = colleft + "px";
     }
