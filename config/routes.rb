@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :calendar_bookings
+  resources :shop_calendars
+  resources :shop_stylist_workdays
+  resources :shop_stylists
+  resources :shop_workdays
+  resources :shop_settings
+  resources :shops
+  resources :hair_dressers
+  get 'booker/day'
+
+  get 'booker/week'
+
   resources :bookings
   resources :services
   resources :clients
