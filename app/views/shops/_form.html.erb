@@ -1,0 +1,77 @@
+<%= form_for(shop) do |f| %>
+  <% if shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_no %>
+    <%= f.text_field :contact_no %>
+  </div>
+
+  <div class="field">
+    <%= f.label :alt_contact_no %>
+    <%= f.text_field :alt_contact_no %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :logo_url %>
+    <%= f.text_field :logo_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :theme %>
+    <%= f.text_field :theme %>
+  </div>
+
+  <div class="field">
+    <%= f.label :main_branch %>
+    <%= f.check_box :main_branch %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hair_dresser_id %>
+    <%= f.text_field :hair_dresser_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

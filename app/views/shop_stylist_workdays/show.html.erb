@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @shop_stylist_workday.shop %>
+</p>
+
+<p>
+  <strong>Stylist:</strong>
+  <%= @shop_stylist_workday.stylist %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @shop_stylist_workday.day %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @shop_stylist_workday.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @shop_stylist_workday.end_time %>
+</p>
+
+<p>
+  <strong>Working:</strong>
+  <%= @shop_stylist_workday.working %>
+</p>
+
+<p>
+  <strong>Effective date:</strong>
+  <%= @shop_stylist_workday.effective_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @shop_stylist_workday.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_shop_stylist_workday_path(@shop_stylist_workday) %> |
+<%= link_to 'Back', shop_stylist_workdays_path %>

@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shop.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @shop.address %>
+</p>
+
+<p>
+  <strong>Contact no:</strong>
+  <%= @shop.contact_no %>
+</p>
+
+<p>
+  <strong>Alt contact no:</strong>
+  <%= @shop.alt_contact_no %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @shop.email %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @shop.website %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @shop.image_url %>
+</p>
+
+<p>
+  <strong>Logo url:</strong>
+  <%= @shop.logo_url %>
+</p>
+
+<p>
+  <strong>Theme:</strong>
+  <%= @shop.theme %>
+</p>
+
+<p>
+  <strong>Main branch:</strong>
+  <%= @shop.main_branch %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @shop.status %>
+</p>
+
+<p>
+  <strong>Hair dresser:</strong>
+  <%= @shop.hair_dresser %>
+</p>
+
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>

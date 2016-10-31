@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @shop_workday.shop %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @shop_workday.day %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @shop_workday.start_time %>
+</p>
+
+<p>
+  <strong>Close time:</strong>
+  <%= @shop_workday.close_time %>
+</p>
+
+<p>
+  <strong>Open:</strong>
+  <%= @shop_workday.open %>
+</p>
+
+<%= link_to 'Edit', edit_shop_workday_path(@shop_workday) %> |
+<%= link_to 'Back', shop_workdays_path %>

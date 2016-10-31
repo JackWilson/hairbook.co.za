@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Hair Dressers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Logo url</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hair_dressers.each do |hair_dresser| %>
+      <tr>
+        <td><%= hair_dresser.name %></td>
+        <td><%= hair_dresser.logo_url %></td>
+        <td><%= hair_dresser.status %></td>
+        <td><%= link_to 'Show', hair_dresser %></td>
+        <td><%= link_to 'Edit', edit_hair_dresser_path(hair_dresser) %></td>
+        <td><%= link_to 'Destroy', hair_dresser, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hair Dresser', new_hair_dresser_path %>

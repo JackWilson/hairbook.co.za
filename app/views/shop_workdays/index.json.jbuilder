@@ -1,0 +1,1 @@
+json.array! @shop_workdays, partial: 'shop_workdays/shop_workday', as: :shop_workday

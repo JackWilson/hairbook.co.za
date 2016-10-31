@@ -1,0 +1,2 @@
+json.extract! shop_stylist_workday, :id, :shop_id, :stylist_id, :day, :start_time, :end_time, :working, :effective_date, :end_date, :created_at, :updated_at
+json.url shop_stylist_workday_url(shop_stylist_workday, format: :json)

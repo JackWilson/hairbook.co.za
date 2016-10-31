@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shop Stylist Workdays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shop</th>
+      <th>Stylist</th>
+      <th>Day</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Working</th>
+      <th>Effective date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shop_stylist_workdays.each do |shop_stylist_workday| %>
+      <tr>
+        <td><%= shop_stylist_workday.shop %></td>
+        <td><%= shop_stylist_workday.stylist %></td>
+        <td><%= shop_stylist_workday.day %></td>
+        <td><%= shop_stylist_workday.start_time %></td>
+        <td><%= shop_stylist_workday.end_time %></td>
+        <td><%= shop_stylist_workday.working %></td>
+        <td><%= shop_stylist_workday.effective_date %></td>
+        <td><%= shop_stylist_workday.end_date %></td>
+        <td><%= link_to 'Show', shop_stylist_workday %></td>
+        <td><%= link_to 'Edit', edit_shop_stylist_workday_path(shop_stylist_workday) %></td>
+        <td><%= link_to 'Destroy', shop_stylist_workday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop Stylist Workday', new_shop_stylist_workday_path %>

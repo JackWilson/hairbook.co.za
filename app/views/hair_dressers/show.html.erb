@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @hair_dresser.name %>
+</p>
+
+<p>
+  <strong>Logo url:</strong>
+  <%= @hair_dresser.logo_url %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @hair_dresser.status %>
+</p>
+
+<%= link_to 'Edit', edit_hair_dresser_path(@hair_dresser) %> |
+<%= link_to 'Back', hair_dressers_path %>

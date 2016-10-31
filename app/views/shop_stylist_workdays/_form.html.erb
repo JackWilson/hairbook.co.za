@@ -1,0 +1,57 @@
+<%= form_for(shop_stylist_workday) do |f| %>
+  <% if shop_stylist_workday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop_stylist_workday.errors.count, "error") %> prohibited this shop_stylist_workday from being saved:</h2>
+
+      <ul>
+      <% shop_stylist_workday.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shop_id %>
+    <%= f.text_field :shop_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stylist_id %>
+    <%= f.text_field :stylist_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :day %>
+    <%= f.text_field :day %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_time %>
+    <%= f.time_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_time %>
+    <%= f.time_select :end_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :working %>
+    <%= f.check_box :working %>
+  </div>
+
+  <div class="field">
+    <%= f.label :effective_date %>
+    <%= f.date_select :effective_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

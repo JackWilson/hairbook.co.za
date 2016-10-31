@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @shop_stylist.shop %>
+</p>
+
+<p>
+  <strong>Stylist:</strong>
+  <%= @shop_stylist.stylist %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @shop_stylist.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @shop_stylist.end_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @shop_stylist.status %>
+</p>
+
+<%= link_to 'Edit', edit_shop_stylist_path(@shop_stylist) %> |
+<%= link_to 'Back', shop_stylists_path %>

@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shop Calendars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shop</th>
+      <th>Stylist</th>
+      <th>Slot start</th>
+      <th>Duration</th>
+      <th>Slot end</th>
+      <th>Available</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shop_calendars.each do |shop_calendar| %>
+      <tr>
+        <td><%= shop_calendar.shop %></td>
+        <td><%= shop_calendar.stylist %></td>
+        <td><%= shop_calendar.slot_start %></td>
+        <td><%= shop_calendar.duration %></td>
+        <td><%= shop_calendar.slot_end %></td>
+        <td><%= shop_calendar.available %></td>
+        <td><%= link_to 'Show', shop_calendar %></td>
+        <td><%= link_to 'Edit', edit_shop_calendar_path(shop_calendar) %></td>
+        <td><%= link_to 'Destroy', shop_calendar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop Calendar', new_shop_calendar_path %>

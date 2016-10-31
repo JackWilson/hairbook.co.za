@@ -1,0 +1,2 @@
+json.extract! shop, :id, :name, :address, :contact_no, :alt_contact_no, :email, :website, :image_url, :logo_url, :theme, :main_branch, :status, :hair_dresser_id, :created_at, :updated_at
+json.url shop_url(shop, format: :json)

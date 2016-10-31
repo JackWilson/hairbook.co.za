@@ -1,0 +1,2 @@
+module HairDressersHelper
+end

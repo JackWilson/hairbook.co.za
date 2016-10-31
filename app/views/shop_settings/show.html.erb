@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Calender slot size:</strong>
+  <%= @shop_setting.calender_slot_size %>
+</p>
+
+<p>
+  <strong>Days ahead calender:</strong>
+  <%= @shop_setting.days_ahead_calender %>
+</p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @shop_setting.shop %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @shop_setting.start_date %>
+</p>
+
+<%= link_to 'Edit', edit_shop_setting_path(@shop_setting) %> |
+<%= link_to 'Back', shop_settings_path %>

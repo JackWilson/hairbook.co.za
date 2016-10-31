@@ -1,0 +1,47 @@
+<%= form_for(shop_calendar) do |f| %>
+  <% if shop_calendar.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop_calendar.errors.count, "error") %> prohibited this shop_calendar from being saved:</h2>
+
+      <ul>
+      <% shop_calendar.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shop_id %>
+    <%= f.text_field :shop_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stylist_id %>
+    <%= f.text_field :stylist_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slot_start %>
+    <%= f.datetime_select :slot_start %>
+  </div>
+
+  <div class="field">
+    <%= f.label :duration %>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slot_end %>
+    <%= f.datetime_select :slot_end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :available %>
+    <%= f.check_box :available %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

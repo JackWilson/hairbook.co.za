@@ -1,0 +1,1 @@
+json.array! @shop_stylists, partial: 'shop_stylists/shop_stylist', as: :shop_stylist

@@ -1,0 +1,32 @@
+<%= form_for(calendar_booking) do |f| %>
+  <% if calendar_booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(calendar_booking.errors.count, "error") %> prohibited this calendar_booking from being saved:</h2>
+
+      <ul>
+      <% calendar_booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :booking_id %>
+    <%= f.text_field :booking_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shop_calendar_id %>
+    <%= f.text_field :shop_calendar_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :occupy_chair %>
+    <%= f.check_box :occupy_chair %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

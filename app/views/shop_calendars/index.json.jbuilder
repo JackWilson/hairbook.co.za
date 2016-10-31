@@ -1,0 +1,1 @@
+json.array! @shop_calendars, partial: 'shop_calendars/shop_calendar', as: :shop_calendar

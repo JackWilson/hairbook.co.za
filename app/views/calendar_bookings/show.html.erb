@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Booking:</strong>
+  <%= @calendar_booking.booking %>
+</p>
+
+<p>
+  <strong>Shop calendar:</strong>
+  <%= @calendar_booking.shop_calendar %>
+</p>
+
+<p>
+  <strong>Occupy chair:</strong>
+  <%= @calendar_booking.occupy_chair %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_booking_path(@calendar_booking) %> |
+<%= link_to 'Back', calendar_bookings_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shop Settings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Calender slot size</th>
+      <th>Days ahead calender</th>
+      <th>Shop</th>
+      <th>Start date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shop_settings.each do |shop_setting| %>
+      <tr>
+        <td><%= shop_setting.calender_slot_size %></td>
+        <td><%= shop_setting.days_ahead_calender %></td>
+        <td><%= shop_setting.shop %></td>
+        <td><%= shop_setting.start_date %></td>
+        <td><%= link_to 'Show', shop_setting %></td>
+        <td><%= link_to 'Edit', edit_shop_setting_path(shop_setting) %></td>
+        <td><%= link_to 'Destroy', shop_setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop Setting', new_shop_setting_path %>

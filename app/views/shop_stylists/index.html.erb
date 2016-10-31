@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shop Stylists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shop</th>
+      <th>Stylist</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shop_stylists.each do |shop_stylist| %>
+      <tr>
+        <td><%= shop_stylist.shop %></td>
+        <td><%= shop_stylist.stylist %></td>
+        <td><%= shop_stylist.start_date %></td>
+        <td><%= shop_stylist.end_date %></td>
+        <td><%= shop_stylist.status %></td>
+        <td><%= link_to 'Show', shop_stylist %></td>
+        <td><%= link_to 'Edit', edit_shop_stylist_path(shop_stylist) %></td>
+        <td><%= link_to 'Destroy', shop_stylist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop Stylist', new_shop_stylist_path %>

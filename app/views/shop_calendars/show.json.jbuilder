@@ -1,0 +1,1 @@
+json.partial! "shop_calendars/shop_calendar", shop_calendar: @shop_calendar
