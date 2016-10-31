@@ -144,6 +144,21 @@ ActiveRecord::Schema.define(version: 20161030021209) do
     t.index ["hair_dresser_id"], name: "index_shops_on_hair_dresser_id"
   end
 
+  create_table "sqlite_stat1", id: false, force: :cascade do |t|
+    t. "tbl"
+    t. "idx"
+    t. "stat"
+  end
+
+  create_table "sqlite_stat4", id: false, force: :cascade do |t|
+    t. "tbl"
+    t. "idx"
+    t. "neq"
+    t. "nlt"
+    t. "ndlt"
+    t. "sample"
+  end
+
   create_table "stylists", force: :cascade do |t|
     t.string   "name"
     t.string   "image_url"

@@ -18,7 +18,7 @@ load_clients = false
 load_bookings = false
 load_shop_settings = false
 load_shop_workdays = false
-load_shop_stylist_workdays = true
+load_shop_stylist_workdays = false
 load_shop_calendars = false
 load_calendar_bookings = false
 
@@ -476,6 +476,70 @@ if load_shop_stylist_workdays
     end
   end
 end
+
+#
+# generate teh shop calendar
+#
+# We need to generate the default entries for each stylist workday combination
+#
+#create_table "shop_calendars", force: :cascade do |t|
+#  t.integer  "shop_id"
+#  t.integer  "stylist_id"
+#  t.datetime "slot_start"
+#  t.integer  "duration"
+#  t.datetime "slot_end"
+#  t.boolean  "available"
+#  t.datetime "created_at", null: false
+#  t.datetime "updated_at", null: false
+#  t.index ["shop_id"], name: "index_shop_calendars_on_shop_id"
+#  t.index ["stylist_id"], name: "index_shop_calendars_on_stylist_id"
+#end
+if load_shop_calendars
+  ShopCalendar.where(:id => 0..100000).destroy_all
+  #
+  # We should do a walk through the shops and get their settings
+  # then based on teh start_date we must calculate which weekday it is
+  # then we should get the Stylist workday parameters and generate the slots
+  #
+  # the start calculation date for the store is based on the start_date plus the days_ahead, vs what the latest
+  # date is in the database already created
+  # Because we have just deleted all the old records, there should be nothing in the table
+  # we will claculate from today for the days_ahead
+  #
+  ShopSetting.all.each do |shop|
+    # Step through the number of days to generate
+    #
+    # for i in 0..shop.days_ahead_calender
+    day = Date.today -1
+
+
+    for i in 0..5
+      day = day + 1
+      weekday = day.strftime("%A")
+      # Now process each Shop Stylist
+      ShopStylist.where(shop_id:shop.shop_id).find_each do |shop_stylist|
+        # We know that we have aligned in teh data generate the start times with the store's workday times
+        #
+        # Now load the shop workday parameters for the specific day
+        midnight = DateTime.now.at_midnight
+        starttyd = shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
+        afskop = midnight + starttyd
+        einde = afskop + 60.minutes
+
+        start_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
+        close_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).close_time.seconds_since_midnight.seconds
+
+        while start_time < close_time do
+          slot_end = start_time + shop.calender_slot_size.minutes
+          ShopCalendar.create(shop_id:shop.shop_id, stylist_id:shop_stylist.stylist_id, slot_start:start_time, duration:shop.calender_slot_size, slot_end:slot_end )
+          start_time = slot_end
+
+        end
+      end
+    end
+  end
+end
+
 
 #Client.create(firstName: 'Angelique', lastName:'Smith', image_url:'AngeliqueSmith.jpg', sex:'female', stylist_id: 1)
 #Client.create(firstName: 'Anna', lastName:'George', image_url:'AnnaGeorge.jpg', sex:'female' , stylist_id: 2)
