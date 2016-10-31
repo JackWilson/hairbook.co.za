@@ -13,12 +13,12 @@ load_shops = false
 load_sorbet_shops = false
 load_stylists = false
 load_stylists_extra = false
-load_shop_stylist = true
+load_shop_stylist = false
 load_clients = false
 load_bookings = false
 load_shop_settings = false
 load_shop_workdays = false
-load_stylist_workdays = false
+load_shop_stylist_workdays = true
 load_shop_calendars = false
 load_calendar_bookings = false
 
@@ -451,21 +451,31 @@ end
 
 # Now generate the shop stylist workdays
 #
-create_table "shop_stylist_workdays", force: :cascade do |t|
-  t.integer  "shop_id"
-  t.integer  "stylist_id"
-  t.string   "day"
-  t.time     "start_time"
-  t.time     "end_time"
-  t.boolean  "working"
-  t.date     "effective_date"
-  t.date     "end_date"
-  t.datetime "created_at",     null: false
-  t.datetime "updated_at",     null: false
-  t.index ["shop_id"], name: "index_shop_stylist_workdays_on_shop_id"
-  t.index ["stylist_id"], name: "index_shop_stylist_workdays_on_stylist_id"
-end
+#create_table "shop_stylist_workdays", force: :cascade do |t|
+#  t.integer  "shop_id"
+#  t.integer  "stylist_id"
+#  t.string   "day"
+#  t.time     "start_time"
+#  t.time     "end_time"
+#  t.boolean  "working"
+#  t.date     "effective_date"
+#  t.date     "end_date"
+#  t.datetime "created_at",     null: false
+#  t.datetime "updated_at",     null: false
+#  t.index ["shop_id"], name: "index_shop_stylist_workdays_on_shop_id"
+#  t.index ["stylist_id"], name: "index_shop_stylist_workdays_on_stylist_id"
+#end
 
+if load_shop_stylist_workdays
+  ShopStylistWorkday.where(:id => 0..10000).destroy_all
+  shop_stylist = ShopStylist.all
+  shop_stylist.each do |item|
+    workdays = ShopWorkday.where(shop_id: item.shop_id)
+    workdays.each do |dag|
+      ShopStylistWorkday.create(shop_id:item.shop_id, stylist_id: item.stylist_id, day:dag.day, start_time:dag.start_time, end_time:dag.close_time, working:true, effective_date:Date.parse("2016/10/31"))
+    end
+  end
+end
 
 #Client.create(firstName: 'Angelique', lastName:'Smith', image_url:'AngeliqueSmith.jpg', sex:'female', stylist_id: 1)
 #Client.create(firstName: 'Anna', lastName:'George', image_url:'AnnaGeorge.jpg', sex:'female' , stylist_id: 2)
