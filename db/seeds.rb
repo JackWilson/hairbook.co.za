@@ -388,7 +388,7 @@ end
 if load_shop_stylist then
   # first clean out all the generated stylist
   #
-  ShopStylist.where(:id => 10..10000).destroy_all
+  ShopStylist.where(:id => 0..10000).destroy_all
 
 
   start = Date.parse("2016/11/01")
@@ -404,6 +404,7 @@ if load_shop_stylist then
   rand_max = high_stylist_id - low_stylist_id
 
   shop_id = Shop.find_by(name:"Head Boys - Menlyn").id
+  ShopStylist.create(shop_id:shop_id, stylist_id:9, start_date:start, status:'Active')
   7.times do
     stylist_id = rand(rand_max)+low_stylist_id
     ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
@@ -448,6 +449,22 @@ if load_shop_stylist then
 end
 
 
+# Now generate the shop stylist workdays
+#
+create_table "shop_stylist_workdays", force: :cascade do |t|
+  t.integer  "shop_id"
+  t.integer  "stylist_id"
+  t.string   "day"
+  t.time     "start_time"
+  t.time     "end_time"
+  t.boolean  "working"
+  t.date     "effective_date"
+  t.date     "end_date"
+  t.datetime "created_at",     null: false
+  t.datetime "updated_at",     null: false
+  t.index ["shop_id"], name: "index_shop_stylist_workdays_on_shop_id"
+  t.index ["stylist_id"], name: "index_shop_stylist_workdays_on_stylist_id"
+end
 
 
 #Client.create(firstName: 'Angelique', lastName:'Smith', image_url:'AngeliqueSmith.jpg', sex:'female', stylist_id: 1)
