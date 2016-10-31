@@ -6,6 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
+#   I will be using control variable to manage the seeds to be loaded in one file
+#
+load_hair_dressers = false
+load_shops = false
+load_sorbet_shops = false
+load_stylists = false
+load_stylists_extra = false
+load_shop_stylist = true
+load_clients = false
+load_bookings = false
+load_shop_settings = false
+load_shop_workdays = false
+load_stylist_workdays = false
+load_shop_calendars = false
+load_calendar_bookings = false
+
 # Lets create some Hair Dressers
 #create_table "hair_dressers", force: :cascade do |t|
 #  t.string   "name"
@@ -14,10 +30,12 @@
 #  t.datetime "created_at", null: false
 #  t.datetime "updated_at", null: false
 #end
-HairDresser.create(name: "Head Boys", logo_url:"headBoys_logo.gif", status:"Active")
-HairDresser.create(name: "Palladium Hair", logo_url:"palladium_hair_logo.png", status:"Active")
-HairDresser.create(name: "Sorbet", logo_url:"sorbet.jpg", status:"Active")
-HairDresser.create(name: "The Corner Shop", logo_url:"theCornerShop.jpg", status:"Active")
+if load_hair_dressers then
+  HairDresser.create(name: "Head Boys", logo_url:"headBoys_logo.gif", status:"Active")
+  HairDresser.create(name: "Palladium Hair", logo_url:"palladium_hair_logo.png", status:"Active")
+  HairDresser.create(name: "Sorbet", logo_url:"sorbet.jpg", status:"Active")
+  HairDresser.create(name: "The Corner Shop", logo_url:"theCornerShop.jpg", status:"Active")
+end
 
 # Now create some shops for these
 #
@@ -38,7 +56,7 @@ HairDresser.create(name: "The Corner Shop", logo_url:"theCornerShop.jpg", status
 #  t.datetime "updated_at",      null: false
 #  t.index ["hair_dresser_id"], name: "index_shops_on_hair_dresser_id"
 #end
-
+if load_shops then
 # Head Boys branches
 Shop.create(name:'Head Boys - Brooklyn', address:'Shop 153, Ground Floor, Brooklyn Mall, Veale Street, Pretoria, 0181, South Africa' , contact_no:'012-346-3341' , alt_contact_no:'012-346-7147' , email:'headboyshairdressing@gmail.co.za' , website:'www.headboyshairdressing.co.za' , image_url:'Headboys1.jpg' , logo_url:'HeadBoys_logo.gif' , theme:'' , main_branch:true , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Head Boys').id)
 Shop.create(name:'Head Boys - Menlyn', address:'Menlyn Mall, Menlyn, Pretoria, 0181, South Africa' , contact_no:'012-348-3355' , alt_contact_no:'' , email:'headboyshairdressing@gmail.co.za' , website:'www.headboyshairdressing.co.za' , image_url:'Headboys1.jpg' , logo_url:'HeadBoys_logo.gif' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Head Boys').id)
@@ -50,6 +68,7 @@ Shop.create(name:'Head Boys - Stellenbosch', address:'Eikestad Mall, 43 Andringa
 Shop.create(name:'Palladium Hair - Pretoria', address:'Shop 3, Waterkloof Heights Shopping Centre, 103 Club Avenue, Pretoria, 0181, South Africa' , contact_no:'012-460-2242' , alt_contact_no:'012-460-2243' , email:'' , website:'www.palladiumhair.com/' , image_url:'' , logo_url:'palladium_hair_logo.png' , theme:'' , main_branch:true , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Palladium Hair').id)
 Shop.create(name:'Palladium Hair - Cape Town', address:'Shop 17, The Square, New Cape Quarter Extension, Somerset road, De Waterkant, Greenpoint, South Africa' , contact_no:'021-418-2242' , alt_contact_no:'021-418-2243' , email:'' , website:'www.palladiumhair.com/' , image_url:'' , logo_url:'palladium_hair_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Palladium Hair').id)
 
+if load_sorbet_shops then
 # Sorbet Stores
 Shop.create(name:'Sorbet @The Park', address:'Shop LG 3 @ The Park Dirk Opperman Street Langenhovenpark Bloemfontein Free State 9301' , contact_no:'051-446-0029' , alt_contact_no:'076-827-2218' , email:'thepark@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Sorbet').id)
 Shop.create(name:'Sorbet Ballito', address:'Shop G51 Ballito Bay Mall Simbithi Dr Ballito KwaZulu-Natal 4399' , contact_no:'032-946-0457' , alt_contact_no:'' , email:'ballito@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Sorbet').id)
@@ -184,27 +203,252 @@ Shop.create(name:'Sorbet Windermere', address:'Shop 18 Windermere Centre 163-177
 Shop.create(name:'Sorbet Wonderboom', address:'Shop G41 Wonderboom Junction Cnr Lavender and Lavender East Roads Annlin West Pretoria Gauteng 0001' , contact_no:'012-543-0157' , alt_contact_no:'076-929-4840' , email:'wonderboom@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Sorbet').id)
 Shop.create(name:'Sorbet Wonderpark', address:'Shop 312 Wonderpark Cnr Heinrich Ave & Old Brits Road Karenpark Karenpark Gauteng 0183' , contact_no:'012-549-0227' , alt_contact_no:'062-258-7959' , email:'wonderpark@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Sorbet').id)
 Shop.create(name:'Sorbet Woodlands Boulevard', address:'Shop 226 Woodlands Boulevard Cnr De Villebois Mareuil & Garsfontein Roads Pretoria Gauteng 0042' , contact_no:'012-997-2410' , alt_contact_no:'084-877-1222' , email:'woodlands@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'Sorbet').id)
-
+end
 # The Corner Shop is net een
 Shop.create(name:'The Corner Shop', address:'Shop 226 Woodlands Boulevard Cnr De Villebois Mareuil & Garsfontein Roads Pretoria Gauteng 0042' , contact_no:'012-997-2410' , alt_contact_no:'084-877-1222' , email:'woodlands@sorbet.co.za' , website:'www.sorbet.co.za' , image_url:'' , logo_url:'Temp_sorbet_logo.png' , theme:'' , main_branch:false , status: 'Active', hair_dresser_id:HairDresser.find_by(name: 'The Corner Shop').id)
+end
 
+#
+# Loading the Shop Settings per shop
+#
+#create_table "shop_settings", force: :cascade do |t|
+#  t.integer  "calender_slot_size"
+#  t.integer  "days_ahead_calender"
+#  t.integer  "shop_id"
+#  t.date     "start_date"
+#  t.datetime "created_at",          null: false
+#  t.datetime "updated_at",          null: false
+#  t.index ["shop_id"], name: "index_shop_settings_on_shop_id"
+#end
+if load_shop_settings then
+  ShopSetting.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+  ShopSetting.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+  ShopSetting.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+  ShopSetting.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+  ShopSetting.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
 
+  ShopSetting.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, calender_slot_size:15, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+  ShopSetting.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, calender_slot_size:15, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+
+  ShopSetting.create(shop_id:Shop.find_by(name:"The Corner Shop").id, calender_slot_size:30, days_ahead_calender: 30, start_date:Date.parse("2016/11/01")  )
+
+end
+
+#
+# Create some workdays per shop
+#create_table "shop_workdays", force: :cascade do |t|
+#  t.integer  "shop_id"
+#  t.string   "day"
+#  t.time     "start_time"
+#  t.time     "close_time"
+#  t.boolean  "open"
+#  t.datetime "created_at", null: false
+#  t.datetime "updated_at", null: false
+#  t.index ["shop_id"], name: "index_shop_workdays_on_shop_id"
+#end
+
+if load_shop_workdays then
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Brooklyn").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Menlyn").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Gift Acres").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Atterbury").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Workday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Monday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Tuesday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Wednesday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Thursday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Friday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Head Boys - Stellenbosch").id, day:"Saturday", start_time:Time.parse("8:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Pretoria").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"Palladium Hair - Cape Town").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Workday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Sunday", start_time:Time.parse("9:00 AM"), close_time:Time.parse("1:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Monday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:false)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Tuesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Wednesday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Thursday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Friday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("6:00 PM"), open:true)
+  ShopWorkday.create(shop_id:Shop.find_by(name:"The Corner Shop").id, day:"Saturday", start_time:Time.parse("7:00 AM"), close_time:Time.parse("3:00 PM"), open:true)
+
+end
+  
 #extra comment koos
 # There will be a problem of uniqueness if we use the name only
 # Clearly we can have the same name at many shops, and mostly it will represent different people
 # We could therefore look at uniqueness of the stylist, not in the DB but in the visual selection tools.
 # We could have say 5 Angels. And Angel 1 can work at about 3 shops maxs simultaneously, but more over time
 # As far as the client is concerned, their link to Angel (say 1) remains unless they break and select another Stylist as preferred.
-# 
-#Stylist.create(name: 'Angel', image_url:'angel.jpg')
-#Stylist.create(name: 'Mandy', image_url:'many.jpg')
-#Stylist.create(name: 'Marco', image_url:'marco.jpg')
-#Stylist.create(name: 'Michael', image_url:'michael.jpg')
-#Stylist.create(name: 'Patricia', image_url:'Patrica.jpg')
-#Stylist.create(name: 'Ruben', image_url:'ruben.jpg')
-#Stylist.create(name: 'Suzi', image_url:'Suzi.jpg')
-#Stylist.create(name: 'Jason', image_url:'jason.jpg')
-#Stylist.create(name: 'Thomas', image_url:'thomas.jpg')
+#
+if load_stylists then
+
+  # these ones have their own photos
+  Stylist.create(name: 'Angel', image_url:'angel.jpg')
+  Stylist.create(name: 'Mandy', image_url:'many.jpg')
+  Stylist.create(name: 'Marco', image_url:'marco.jpg')
+  Stylist.create(name: 'Michael', image_url:'michael.jpg')
+  Stylist.create(name: 'Patricia', image_url:'Patrica.jpg')
+  Stylist.create(name: 'Ruben', image_url:'ruben.jpg')
+  Stylist.create(name: 'Suzi', image_url:'Suzi.jpg')
+  Stylist.create(name: 'Jason', image_url:'jason.jpg')
+  Stylist.create(name: 'Thomas', image_url:'thomas.jpg')
+end
+
+if load_stylists_extra then
+  # first clean out all the generated stylist
+  #
+  Stylist.where(:id => 10..10000).destroy_all
+
+
+  female_names = %w{Angelina Angelique Angie Anna April Beatrix Bianca Cathy Cheryl Demmy Diana Dominique Donna Estelle Gladys Hazel Jean Jennie Jennifer Jenny Kate Kgomotso Lane Laura Leandri Lee Li-Anne Lianne Lydia Marie Mary Mary-Anne Nadia Nicki Nicole Olga Pamela Petra Reese Rina Rosie Sam Samantha Sandra Sue Sunette Tania Tanya Thabang Thandi Thembi}
+  male_names = %w{Abel Albert Bongani Bruce Charles Chris Christian Conrad Dan David Deon Derick Dion Dirk Edward Forest Harrison Hendri Hendrik Jack James John Joseph Konrad Koos Lebogang Leon Lian Mark Markus Michel Moses Nick Patrick Paul Percy Pete Peter Petros Sam Simon Sipho Trevor William}
+
+  grp_start = [0, 0.5, 0.25, 0.01, 0.75, 0.35, 0.8, 0.05, 0.9]
+  grp_end = [1, 1, 0.5, 0.25, 1, 0.65, 1, 0.25, 1]
+  female_size = female_names.size
+  male_size = male_names.size
+
+  9.times do |g|
+    group = "_#{g}"
+    for i in Integer(female_size*grp_start[g])...Integer(female_size*grp_end[g])
+      Stylist.create(name:"#{female_names[i]}#{group}", image_url:'female.jpg')
+    end
+    for i in Integer(male_size*grp_start[g])...Integer(male_size*grp_end[g])
+      Stylist.create(name:"#{male_names[i]}#{group}", image_url:'male.jpg')
+    end
+
+  end
+
+end
+
+  # these ones will use the default male/female images
+
+# Assign some stylists to shops
+#
+#create_table "shop_stylists", force: :cascade do |t|
+#  t.integer  "shop_id"
+#  t.integer  "stylist_id"
+#  t.date     "start_date"
+#  t.date     "end_date"
+#  t.string   "status"
+#  t.datetime "created_at", null: false
+#  t.datetime "updated_at", null: false
+#  t.index ["shop_id"], name: "index_shop_stylists_on_shop_id"
+#  t.index ["stylist_id"], name: "index_shop_stylists_on_stylist_id"
+#end
+if load_shop_stylist then
+  # first clean out all the generated stylist
+  #
+  ShopStylist.where(:id => 10..10000).destroy_all
+
+
+  start = Date.parse("2016/11/01")
+  shop_id = Shop.find_by(name:"Head Boys - Brooklyn").id
+  9.times do |stylist_id|
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  # Generate the rest randomly
+  #
+  low_stylist_id = Stylist.find_by(name:"Angelina_0").id
+  high_stylist_id = Stylist.find_by(name:"William_8").id
+  rand_max = high_stylist_id - low_stylist_id
+
+  shop_id = Shop.find_by(name:"Head Boys - Menlyn").id
+  7.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"Head Boys - Gift Acres").id
+  5.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"Head Boys - Atterbury").id
+  3.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"Head Boys - Stellenbosch").id
+  3.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"Palladium Hair - Pretoria").id
+  8.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"Palladium Hair - Cape Town").id
+  8.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+  shop_id = Shop.find_by(name:"The Corner Shop").id
+  3.times do
+    stylist_id = rand(rand_max)+low_stylist_id
+    ShopStylist.create(shop_id:shop_id, stylist_id:stylist_id, start_date:start, status:'Active')
+  end
+
+end
+
+
+
 
 #Client.create(firstName: 'Angelique', lastName:'Smith', image_url:'AngeliqueSmith.jpg', sex:'female', stylist_id: 1)
 #Client.create(firstName: 'Anna', lastName:'George', image_url:'AnnaGeorge.jpg', sex:'female' , stylist_id: 2)
