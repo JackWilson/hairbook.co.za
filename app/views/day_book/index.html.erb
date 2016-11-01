@@ -1,7 +1,7 @@
 <!DOCTYPE=html>
 <html>
 <head>
-  <%= stylesheet_link_tag "filename" %>
+  <%= stylesheet_link_tag "day_book" %>
 </head>
 <body>
 <h1>DayBook#index</h1>
@@ -9,150 +9,27 @@
 <p> There are : <%= @dayentries.size %> entries </p>
 <p>Find me in app/views/day_book/Index.html.erb</p>
 <div class="calendar">
-  <!-- ### column 1 ### -->
-  <div class="column">
-    <div class="stylist">Megan</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 2 ### -->
-  <div class="column">
-    <div class="stylist">Amber</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 3 ### -->
-  <div class="column">
-    <div class="stylist">Tiffany</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 4 ### -->
-  <div class="column">
-    <div class="stylist">Roxanne</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 5 ### -->
-  <div class="column">
-    <div class="stylist">Robin</div>
-    <div class="slot rowspan2">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 6 ### -->
-  <div class="column">
-    <div class="stylist">Yvette</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 7 ### -->
-  <div class="column">
-    <div class="stylist">Matthew</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 8 ### -->
-  <div class="column">
-    <div class="stylist">Logan</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
-  <!-- ### column 9 ### -->
-  <div class="column">
-    <div class="stylist">Donovan</div>
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-  </div>
+  <!--column loop-->
+  <%
+    current_stylist_name = ''
+    column_switch = false
+    @dayentries.each do |entry|
+      if current_stylist_name != entry.stylist.name then
+        current_stylist_name = entry.stylist.name
+        if !column_switch then
+          column_switch = true
+        else
+          %>
+          </div>
+        <% end %>
+        <div class="column">
+          <div class="stylist"><%= entry.stylist.name %></div>
+      <%
+        end
+      %>
+      <div class="slot">1</div>
+    <% end %>
+    </div>
 </div>
 </body>
 </html>

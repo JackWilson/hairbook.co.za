@@ -11,7 +11,6 @@ class DayBookController < ApplicationController
     search_str += start_date
     search_str += " AND slot_end <= "
     search_str += end_date
-    puts search_str
 
     @dayentries = ShopCalendar.where(search_str).order(:stylist_id, :slot_start)
 
