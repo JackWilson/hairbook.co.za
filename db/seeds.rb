@@ -19,7 +19,7 @@ load_bookings = false
 load_shop_settings = false
 load_shop_workdays = false
 load_shop_stylist_workdays = false
-load_shop_calendars = false
+load_shop_calendars = true
 load_calendar_bookings = false
 
 # Lets create some Hair Dressers
@@ -521,13 +521,16 @@ if load_shop_calendars
         # We know that we have aligned in teh data generate the start times with the store's workday times
         #
         # Now load the shop workday parameters for the specific day
-        midnight = DateTime.now.at_midnight
-        starttyd = shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
-        afskop = midnight + starttyd
-        einde = afskop + 60.minutes
+#        midnight = DateTime.now.at_midnight
+#        starttyd = shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
+#        afskop = midnight + starttyd
+#s        einde = afskop + 60.minutes
 
-        start_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
-        close_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).close_time.seconds_since_midnight.seconds
+#        start_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
+#        close_time = DateTime.now.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).close_time.seconds_since_midnight.seconds
+
+        start_time = day.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).start_time.seconds_since_midnight.seconds
+        close_time = day.at_midnight + shop.shop.shop_workdays.find_by(day: weekday).close_time.seconds_since_midnight.seconds
 
         while start_time < close_time do
           slot_end = start_time + shop.calender_slot_size.minutes
