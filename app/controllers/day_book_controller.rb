@@ -1,5 +1,5 @@
 class DayBookController < ApplicationController
-  def Index
+  def index
     shop_id = Shop.find_by(name: "Head Boys - Brooklyn").id
 #    start_date = DateTime.parse("2016/11/02 0:0:0")
     start_date = "'2016-11-02 00:00:00'"
