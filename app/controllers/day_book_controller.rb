@@ -1,6 +1,7 @@
 class DayBookController < ApplicationController
   def index
     shop = Shop.find_by(name: "Head Boys - Brooklyn")
+
     #
     # Get the open and close times for teh shop for the day
     #
