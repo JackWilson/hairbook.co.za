@@ -13,9 +13,9 @@
 //   }
 // }
 
-$columns: 8;
+$columns: 9;
 $slots: 22;
-$column_width: percentage(95/$columns/100);
+$column_width: percentage(100/$columns/100);
 $slot_height: percentage(90/$slots/100);
 
 html {
@@ -51,11 +51,11 @@ div.calendar {
       height: $slot_height * 2;
     }
   }
-  div.time_column {
-    flex: 1;
+  div#time_column {
+    //flex: 1;
     background-color: deepskyblue;
     height: 100%;
-    width: 100px;
+    width: 5%;
 
     div.time_label {
       background-color: lightgoldenrodyellow;
@@ -63,6 +63,7 @@ div.calendar {
       height: $slot_height;
       text-align: right;
       padding-right: 5px;
+      width: auto;
     }
   }
 }
