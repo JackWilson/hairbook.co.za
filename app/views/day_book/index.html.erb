@@ -4,18 +4,21 @@
   <%= stylesheet_link_tag "day_book" %>
 </head>
 <body>
-<h1>DayBook#index</h1>
-
-<p> There are : <%= @dayentries.size %> entries </p>
-<p>Find me in app/views/day_book/Index.html.erb</p>
 <div class="calendar">
   <!--column loop-->
+  <div class="time_column">
+    <div class="time_title">Time</div>
+  <% @slot_times.each do |slot_time|
+      %><div class="time_label"><%= slot_time %></div>
+    <% end %>
+  </div>
   <%
-    current_stylist_name = ''
+
+    current_stylist_id = 0
     column_switch = false
     @dayentries.each do |entry|
-      if current_stylist_name != entry.stylist.name then
-        current_stylist_name = entry.stylist.name
+      if current_stylist_id != entry.stylist_id then
+        current_stylist_id = entry.stylist_id
         if !column_switch then
           column_switch = true
         else
