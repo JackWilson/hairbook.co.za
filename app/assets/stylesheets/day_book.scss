@@ -15,7 +15,7 @@
 
 $columns: 8;
 $slots: 22;
-$column_width: percentage(92/$columns/100);
+$column_width: percentage(95/$columns/100);
 $slot_height: percentage(90/$slots/100);
 
 html {
@@ -55,7 +55,7 @@ div.calendar {
     flex: 1;
     background-color: deepskyblue;
     height: 100%;
-    width: 5%;
+    width: 100px;
 
     div.time_label {
       background-color: lightgoldenrodyellow;

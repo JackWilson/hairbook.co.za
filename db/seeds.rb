@@ -19,8 +19,8 @@ load_bookings = false
 load_shop_settings = false
 load_shop_workdays = false
 load_shop_stylist_workdays = false
-load_shop_calendars = true
-load_calendar_bookings = false
+load_shop_calendars = false
+load_calendar_bookings = true
 
 # Lets create some Hair Dressers
 #create_table "hair_dressers", force: :cascade do |t|
@@ -542,7 +542,73 @@ if load_shop_calendars
     end
   end
 end
+#
+# Now create some dummy bookings fro customers and services
+#
+if load_bookings then
+  Booking.where(:id => 0..100000).destroy_all
+  # setup the default start time from which to index teh start data
+  start = DateTime.new(2016,11,02, 7,0)
+  shop = Shop.find_by(name:"Head Boys - Brooklyn")
 
+  shop.stylists.all.each do |stylist|
+
+    # we set the initial start time forward by up to 4 half hours
+    startTime = start + (rand(4) * 0.5*60).minutes
+
+    # we want to create some entries for today that makes sense
+    # we will pick the clients, and then make service bookings for them
+
+    # get the clients
+    clients = Client.where(stylist_id: stylist.id)
+    clients.each do |client|
+      # now select a random client from this array
+      # client = clients[rand(clients.size)]
+
+      # new random implementation
+      # we check a flag of 0,1,2 and if 0 or 1 ignore the client for this day
+      if rand(3) > 1 then
+        # Select a random service from the service table
+        service = Service.find(1+rand(6))
+
+        # # set a random booking start time by adding a random number of half hours to teh default start time
+        # # startTime = start + (rand(20) * 0.5*60).minutes
+
+        # Now create a new booking entry and fill in the fields
+        item = stylist.bookings.build(client_id: client.id, service_id: service.id)
+        item.date = startTime
+        item.status = "new"
+        item.save!
+        #
+        # at this time we must tie this to teh right number of slots for the shop and stylist
+        #
+        end_time = startTime + service.duration.minutes
+        #
+        # select the Calender entry ids of the matching slots
+        start_date = "'"+startTime+"'"
+        end_date = "'"+end_time+"'"
+        search_str = "shop_id = "
+        search_str += shop.id.to_s
+        search_str += " AND stylist_id ="
+        search_str += stylist.id
+        search_str += " AND slot_start >= "
+        search_str += start_date
+        search_str += " AND slot_end <= "
+        search_str += end_date
+        @dayentries = ShopCalendar.where(search_str).order(:stylist_id, :slot_start)
+        shop.calendar.where()
+        # now move teh startTime further ahead by up to 1 hour
+        startTime = startTime + service.duration.minutes + (rand(3) * 0.5*60).minutes
+
+      end
+    end
+
+  end
+
+
+
+
+end
 
 #Client.create(firstName: 'Angelique', lastName:'Smith', image_url:'AngeliqueSmith.jpg', sex:'female', stylist_id: 1)
 #Client.create(firstName: 'Anna', lastName:'George', image_url:'AnnaGeorge.jpg', sex:'female' , stylist_id: 2)
