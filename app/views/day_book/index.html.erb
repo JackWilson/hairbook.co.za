@@ -3,6 +3,7 @@
 <head>
   <script>
     $(document).ready(function() {
+      var selected_bool = false;
       function deselect(e) {
         $('.pop').slideFadeToggle(function() {
           e.removeClass('selected');
@@ -11,9 +12,11 @@
 
       $(function() {
         $('.slot').on('click', function() {
-          if($(this).hasClass('selected')) {
+          if(($(this).hasClass('selected')) && (selected_bool)) {
             deselect($(this));
-          } else {
+            selected_bool = false;
+          } else if (!selected_bool) {
+            selected_bool = true;
             $(this).addClass('selected');
             $('.pop').slideFadeToggle();
           }
@@ -29,6 +32,8 @@
   <%= stylesheet_link_tag "day_book" %>
 </head>
 <body>
+<div class="messagepop pop">
+</div>
 <div id="calendar">
   <!--column loop-->
   <div id="time_column">
