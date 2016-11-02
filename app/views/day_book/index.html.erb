@@ -46,7 +46,9 @@
   <!--Get each stylist name as a heading-->
   <% @DayBook.stylistdays.each do |stylistday| %>
   <div class="column">
-    <div class="stylist"><%=stylistday.name%></div>
+    <div class="stylist"><%=stylistday.name%>
+      <%= link_to image_tag(stylistday.image_url) %>
+    </div>
     <% stylistday.dayslots.each do |slot| %>
     <% if slot.slot_type == "Booked" then %>
         <div class="slot" style="height: <%= slot.duration/4.40 %>%;">
