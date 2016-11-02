@@ -61,7 +61,7 @@ div#calendar {
     }
 
     div.slot {
-      background-color: green;
+      background-color: red;
       border: 1px black dashed;
       height: $slot_height;
     }
@@ -69,9 +69,12 @@ div#calendar {
       height: $slot_height * 2;
     }
     div.slot.selected {
-      background-color:purple;
+      background-color:purple !important;
       color:white;
       z-index:100;
+    }
+    div.slot.available {
+      background-color: green;
     }
   }
   div#time_column {

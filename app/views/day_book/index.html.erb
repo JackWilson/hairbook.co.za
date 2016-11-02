@@ -48,9 +48,11 @@
   <div class="column">
     <div class="stylist"><%=stylistday.name%></div>
     <% stylistday.dayslots.each do |slot| %>
-        <!--if it's available, add the available css class-->
-    <% if slot.
-    <div class="slot available" style="height: <%= slot.duration/4.40 %>%;">1</div>
+    <% if slot.slot_type == "Booked" then %>
+        <div class="slot" style="height: <%= slot.duration/4.40 %>%;">1</div>
+      <% else %>
+        <div class="slot available" style="height: <%= slot.duration/4.40 %>%;">1</div>
+    <% end %>
     <% end %>
   </div>
    <% end %>
