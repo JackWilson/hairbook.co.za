@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shop: one
+  stylist: one
+  slot_start: 2016-10-30 03:48:01
+  duration: 1
+  slot_end: 2016-10-30 03:48:01
+  available: false
+
+two:
+  shop: two
+  stylist: two
+  slot_start: 2016-10-30 03:48:01
+  duration: 1
+  slot_end: 2016-10-30 03:48:01
+  available: false

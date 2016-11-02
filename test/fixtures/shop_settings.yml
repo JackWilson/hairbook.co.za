@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  calender_slot_size: 1
+  days_ahead_calender: 1
+  shop: one
+  start_date: 2016-10-30
+
+two:
+  calender_slot_size: 1
+  days_ahead_calender: 1
+  shop: two
+  start_date: 2016-10-30

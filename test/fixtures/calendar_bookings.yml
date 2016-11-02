@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  booking: one
+  shop_calendar: one
+  occupy_chair: false
+
+two:
+  booking: two
+  shop_calendar: two
+  occupy_chair: false
