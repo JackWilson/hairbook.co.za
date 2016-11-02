@@ -32,6 +32,7 @@
   <%= stylesheet_link_tag "day_book" %>
 </head>
 <body>
+<h2>Dagboek <%= @DayBook.name + " " + @DayBook.stylistdays.size.to_s + " slots " + @DayBook.stylistdays[1].dayslots.size.to_s%></h2>
 <div class="messagepop pop">
 </div>
 <div id="calendar">

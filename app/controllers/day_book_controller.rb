@@ -2,6 +2,12 @@ class DayBookController < ApplicationController
   def index
     shop = Shop.find_by(name: "Head Boys - Brooklyn")
     #
+    # Using DayBook classes
+    #
+    day = DateTime.parse("2016-11-02")
+    @DayBook = ShopDayBook.new(shop.id, day)
+
+    #
     # Get the open and close times for teh shop for the day
     #
     shop_workday = shop.shop_workdays.find_by(day: 'Tuesday')
