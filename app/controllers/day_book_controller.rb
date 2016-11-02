@@ -1,16 +1,19 @@
 class DayBookController < ApplicationController
   def index
-    shop = Shop.find_by(name: "Head Boys - Brooklyn")
+    @shop = Shop.find_by(name: "Head Boys - Brooklyn")
+    day = DateTime.parse("2016-11-02")
+    @DayBook = ShopDayBook.new(@shop, day)
+
     #
     # Get the open and close times for teh shop for the day
     #
-    shop_workday = shop.shop_workdays.find_by(day: 'Tuesday')
+    shop_workday = @shop.shop_workdays.find_by(day: 'Tuesday')
     @shop_start = shop_workday.start_time.seconds_since_midnight.seconds
     @shop_close = shop_workday.close_time.seconds_since_midnight.seconds
     #
     # Get the default slot size for the shop
     #
-    @shop_slot_size = shop.shop_settings.first.calender_slot_size
+    @shop_slot_size = @shop.shop_settings.first.calender_slot_size
     #
     # Build a collection of slot times that can be used for the slot row titles
     # We do not want to destruct the start time instance variable
@@ -29,7 +32,7 @@ class DayBookController < ApplicationController
     start_date = "'2016-11-02 00:00:00'"
     end_date = "'2016-11-02 23:59:00'"
     search_str = "shop_id = "
-    search_str += shop.id.to_s
+    search_str += @shop.id.to_s
     search_str += " AND slot_start >= "
     search_str += start_date
     search_str += " AND slot_end <= "

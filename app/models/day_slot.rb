@@ -3,18 +3,20 @@ class ShopDayBook
   attr_accessor   :day
   attr_accessor   :shop_id
   attr_accessor   :stylistdays
-  def initialize (shop_id, day)
-    @name = Shop.find(shop_id).name
+  attr_accessor   :shop
+  def initialize (shop, day)
+    @shop = shop
+    @name = shop.name
     @day = day.to_s(:db)
-    @shop_id = 1
-    load_stylistdays(shop_id, @day)
+    @shop_id = shop.id
+    load_stylistdays(@day)
   end
 
-  def load_stylistdays(shop_id, day)
+  def load_stylistdays(day)
     @stylistdays = Array.new
 
-    ShopStylist.where(shop_id:shop_id).find_each do |stylist|
-      stylist_day = StylistDay.new(shop_id, @day, stylist.stylist_id)
+    @shop.shop_stylists.each do |stylist|
+      stylist_day = StylistDay.new(stylist, @day)
       @stylistdays.push(stylist_day)
     end
 
@@ -28,15 +30,16 @@ class StylistDay
   attr_accessor :stylist_id
   attr_accessor :image_url
   attr_accessor :dayslots
-  def initialize (shop_id, day, stylist_id)
-    stylist = Stylist.find(stylist_id)
+  attr_accessor :stylist
+  def initialize (stylist, day)
+    @stylist = stylist
     @name = stylist.name
     @day = day.to_s
     @stylist_id = stylist_id
     @image_url = stylist.image_url
-    load_slots(shop_id)
+    load_slots()
   end
-  def load_slots(shop_id)
+  def load_slots()
     start_date = DateTime.parse(@day).beginning_of_day.to_s(:db)
     end_date = DateTime.parse(@day).end_of_day.to_s(:db)
     search_str = "shop_id = "
