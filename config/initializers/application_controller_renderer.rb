@@ -4,3 +4,4 @@
 #   http_host: 'example.org',
 #   https: false
 # )
+require "/Users/brandtjc/rails_work/hairbook.co.za/app/models/day_slot.rb"

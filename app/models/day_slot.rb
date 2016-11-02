@@ -4,11 +4,9 @@ class ShopDayBook
   attr_accessor   :shop_id
   attr_accessor   :stylistdays
   def initialize (shop_id, day)
-    puts "**************** shop day book initialize shop_id = " + shop_id.to_s
     @name = Shop.find(shop_id).name
     @day = day.to_s(:db)
     @shop_id = 1
-    @name = "Testing Classes"
     load_stylistdays(shop_id, @day)
   end
 
@@ -16,7 +14,7 @@ class ShopDayBook
     @stylistdays = Array.new
 
     ShopStylist.where(shop_id:shop_id).find_each do |stylist|
-      stylist_day = StylistDay.new(shop_id, @day, stylist.id)
+      stylist_day = StylistDay.new(shop_id, @day, stylist.stylist_id)
       @stylistdays.push(stylist_day)
     end
 
@@ -30,7 +28,7 @@ class StylistDay
   attr_accessor :stylist_id
   attr_accessor :image_url
   attr_accessor :dayslots
-  def initialize (stylist_id, day, shop_id)
+  def initialize (shop_id, day, stylist_id)
     stylist = Stylist.find(stylist_id)
     @name = stylist.name
     @day = day.to_s
@@ -49,29 +47,28 @@ class StylistDay
     search_str += start_date
     search_str += "') AND slot_end <= Datetime('"
     search_str += end_date + "')"
-    puts "Search String is:" + search_str
-    #
+     #
     # load all the empty slots
     #
     @dayslots = Array.new
+    last_id = 0
     ShopCalendar.where(search_str).find_each do |slot|
       #
-      # if the slot is in the Calendar Bookings table, it emans there is a booking for this slot
+      # if the slot is in the Calendar Bookings table, it means there is a booking for this slot
       #
-      last_id = 0
-      booking = CalenderBooking.find_by(shop_calendar_id:slot.id)
-      if booking.empty? then
-        slot = CalendarSlot.new(slot.id,'Empty slot')
-        @dayslots.push(slot)
-      else
-        if last_id == booking.id then
+      booking = CalendarBooking.find_by(shop_calendar_id:slot.id)
+      if (booking) then
+        if last_id == booking.booking_id then
           # ignore if we already created the booking slot
         else
           # create a new booking slot
-          slot = CalendarSlot.new(booking.id,"Booked")
+          slot = CalendarSlot.new(booking.booking_id,"Booked")
           @dayslots.push(slot)
-          last_id = booking.id
+          last_id = booking.booking_id
         end
+      else
+        slot = CalendarSlot.new(slot.id,'Empty slot')
+        @dayslots.push(slot)
       end
     end
   end
