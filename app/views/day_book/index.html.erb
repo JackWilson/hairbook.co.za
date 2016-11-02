@@ -11,7 +11,7 @@
       }
 
       $(function() {
-        $('.slot').on('click', function() {
+        $('.available').on('click', function() {
           if(($(this).hasClass('selected')) && (selected_bool)) {
             deselect($(this));
             selected_bool = false;
@@ -49,9 +49,13 @@
     <div class="stylist"><%=stylistday.name%></div>
     <% stylistday.dayslots.each do |slot| %>
     <% if slot.slot_type == "Booked" then %>
-        <div class="slot" style="height: <%= slot.duration/4.40 %>%;">1</div>
+        <div class="slot" style="height: <%= slot.duration/4.40 %>%;">
+          <%= slot.client_name %><br/>
+          <%= slot.client_contact_no %><br/>
+          <%= slot.service_name %>
+        </div>
       <% else %>
-        <div class="slot available" style="height: <%= slot.duration/4.40 %>%;">1</div>
+        <div class="slot available" style="height: <%= slot.duration/4.40 %>%;">available</div>
     <% end %>
     <% end %>
   </div>

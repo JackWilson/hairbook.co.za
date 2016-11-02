@@ -62,8 +62,11 @@ div#calendar {
 
     div.slot {
       background-color: red;
+      font-size: 1rem;
       border: 1px black dashed;
       height: $slot_height;
+      color: white;
+      padding: 2%;
     }
     div.slot.rowspan2 {
       height: $slot_height * 2;
@@ -75,6 +78,7 @@ div#calendar {
     }
     div.slot.available {
       background-color: green;
+      font-size: 1rem;
     }
   }
   div#time_column {
