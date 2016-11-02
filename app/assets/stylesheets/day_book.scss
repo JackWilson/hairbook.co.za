@@ -25,6 +25,32 @@ html {
   }
 }
 
+.messagepop {
+  background-color:#FFFFFF;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: 15px;
+  position:absolute;
+  text-align:left;
+  width:394px;
+  z-index:50;
+  padding: 25px 25px 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 3px;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
+.messagepop p, .messagepop.div {
+  border-bottom: 1px solid #EFEFEF;
+  margin: 8px 0;
+  padding-bottom: 8px;
+}
+
 div#calendar {
   width:100%;
   height:100%;
@@ -46,9 +72,13 @@ div#calendar {
       border: 1px black dashed;
       height: $slot_height;
     }
-
     div.slot.rowspan2 {
       height: $slot_height * 2;
+    }
+    div.slot.selected {
+      background-color:purple;
+      color:white;
+      z-index:100;
     }
   }
   div#time_column {
