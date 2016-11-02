@@ -43,27 +43,17 @@
       %><div class="time_label"><%= slot_time %></div>
     <% end %>
   </div>
-  <%
-
-    current_stylist_id = 0
-    column_switch = false
-    @dayentries.each do |entry|
-      if current_stylist_id != entry.stylist_id then
-        current_stylist_id = entry.stylist_id
-        if !column_switch then
-          column_switch = true
-        else
-          %>
-          </div>
-        <% end %>
-        <div class="column">
-          <div class="stylist"><%= entry.stylist.name %></div>
-      <%
-        end
-      %>
-      <div class="slot">1</div>
+  <!--Get each stylist name as a heading-->
+  <% @DayBook.stylistdays.each do |stylistday| %>
+  <div class="column">
+    <div class="stylist"><%=stylistday.name%></div>
+    <% stylistday.dayslots.each do |slot| %>
+        <!--if it's available, add the available css class-->
+    <% if slot.
+    <div class="slot available" style="height: <%= slot.duration/4.40 %>%;">1</div>
     <% end %>
-    </div>
+  </div>
+   <% end %>
 </div>
 </body>
 </html>
