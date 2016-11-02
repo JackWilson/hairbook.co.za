@@ -19,3 +19,6 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore all the the IDE files
+/.idea/hairbook.co.za.iml
