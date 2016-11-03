@@ -3,6 +3,12 @@
 <head>
   <script>
     $(document).ready(function() {
+      console.log($('.time_title').css('height'));
+      console.log($('.stylist').css('height'));
+      time_title_height = $('.stylist').css('height');
+      console.log('time_title_height = ' + time_title_height);
+      $('.time_title').css('height', time_title_height);
+
       var selected_bool = false;
       function deselect(e) {
         $('.pop').slideFadeToggle(function() {
@@ -32,9 +38,7 @@
   <%= stylesheet_link_tag "day_book" %>
 </head>
 <body>
-<h2>Dagboek <%= @DayBook.name + " " + @DayBook.stylistdays.size.to_s + " slots " + @DayBook.stylistdays[1].dayslots.size.to_s%></h2>
-<div class="messagepop pop">
-</div>
+<div class="messagepop pop"></div>
 <div id="calendar">
   <!--column loop-->
   <div id="time_column">
@@ -47,7 +51,7 @@
   <% @DayBook.stylistdays.each do |stylistday| %>
   <div class="column">
     <div class="stylist"><%=stylistday.name%>
-      <%= link_to image_tag(stylistday.image_url) %>
+      <%= image_tag(stylistday.image_url) %>
     </div>
     <% stylistday.dayslots.each do |slot| %>
     <% if slot.slot_type == "Booked" then %>
