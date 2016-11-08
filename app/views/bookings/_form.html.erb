@@ -12,28 +12,42 @@
   <% end %>
 
   <div class="field">
+    <<script type="text/javascript" charset="utf-8">
+      var my_data = $("#dialog_form").data('data-stylist-id');
+    </script>
     <%= f.label :stylist_id %>
-    <%= f.text_field :stylist_id, placeholder: 'user@domain.com' %>
+    <%= f.text_field :stylist_id, :id=>'stylist_id_field' %>
+    <script type="text/javascript">
+      var my_email= $('#url').attr('href');
+      var stylist_id = $('')
+      $(document).ready(function(){
+        $("#stylist_id_field").val(stylist_id);
+        $("#client_id_field").val(my_email);
+        $("#service_id_field").val(my_email);
+        $("#date_id_field").val(my_email);
+        $("#status_id_field").val(my_email);
+      });
+    </script>
   </div>
 
   <div class="field">
     <%= f.label :client_id %>
-    <%= f.text_field :client_id %>
+    <%= f.text_field :client_id, :id=>'client_id_field' %>
   </div>
 
   <div class="field">
     <%= f.label :service_id %>
-    <%= f.text_field :service_id %>
+    <%= f.text_field :service_id, :id=>'service_id_field' %>
   </div>
 
   <div class="field">
     <%= f.label :date %>
-    <%= f.datetime_select :date %>
+    <%= f.datetime_select :date, :id=>'date_id_field' %>
   </div>
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.text_field :status %>
+    <%= f.text_field :status, :id=>'status_id_field' %>
   </div>
 
   <div class="actions">
