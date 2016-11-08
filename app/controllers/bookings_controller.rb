@@ -63,6 +63,14 @@ class BookingsController < ApplicationController
     end
   end
 
+  def make
+    @booking = Booking.make
+  end
+
+  def save
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking

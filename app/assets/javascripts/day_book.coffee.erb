@@ -3,18 +3,18 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-    $ ->
-      $('.available').click (e) ->
-        e.preventDefault()
-        url = $('#url').attr('href')
-        dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog
-          autoOpen: false,
-          width: 520,
-          modal: true,
-          open: ->
-            return $(this).load(url)
-          close: ->
-            $('#dialog-form').remove()
-        dialog_form.dialog('open')
+#    $ ->
+#      $('.available').click (e) ->
+#        e.preventDefault()
+#        url = $('#url').attr('href')
+#        dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog
+#          autoOpen: false,
+#          width: 520,
+#          modal: true,
+#          open: ->
+#            return $(this).load(url)
+#          close: ->
+#            $('#dialog-form').remove()
+#        dialog_form.dialog('open')
 
 

@@ -17,17 +17,6 @@
     </script>
     <%= f.label :stylist_id %>
     <%= f.text_field :stylist_id, :id=>'stylist_id_field' %>
-    <script type="text/javascript">
-      var my_email= $('#url').attr('href');
-      var stylist_id = $('')
-      $(document).ready(function(){
-        $("#stylist_id_field").val(stylist_id);
-        $("#client_id_field").val(my_email);
-        $("#service_id_field").val(my_email);
-        $("#date_id_field").val(my_email);
-        $("#status_id_field").val(my_email);
-      });
-    </script>
   </div>
 
   <div class="field">

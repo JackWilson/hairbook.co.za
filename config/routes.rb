@@ -13,7 +13,12 @@ Rails.application.routes.draw do
 
   get 'booker/week'
 
-  resources :bookings
+  resources :bookings do
+    collection do
+      get 'make'
+      post 'save'
+    end
+  end
   resources :services
   resources :clients
   resources :stylists
